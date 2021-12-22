@@ -3,11 +3,11 @@
 
 #include <string>
 
-struct MyMoneroMethod {
+struct ProsusMethod {
     const char *name;
     std::string (*method)(const std::string &args);
 };
-extern const MyMoneroMethod myMoneroMethods[];
-extern const unsigned myMoneroMethodCount;
+extern const ProsusMethod ProsusMethods[];
+extern const unsigned ProsusMethodCount;
 
 #endif

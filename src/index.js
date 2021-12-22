@@ -1,7 +1,7 @@
 import { NativeModules } from 'react-native'
 
-const native = NativeModules.MyMoneroCore
+const native = NativeModules.ProsusCore
 
-export function callMyMonero(method, jsonArguments) {
-  return native.callMyMonero(method, jsonArguments)
+export function callProsus(method, jsonArguments) {
+  return native.callProsus(method, jsonArguments)
 }

@@ -30,22 +30,17 @@ async function main(): Promise<void> {
 
 async function downloadSources(): Promise<void> {
   getZip(
-    'boost_1_63_0.zip',
-    'https://dl.bintray.com/boostorg/release/1.63.0/source/boost_1_63_0.zip'
+    'boost_1_76_0.zip',
+    'https://boostorg.jfrog.io/artifactory/main/release/1.76.0/source/boost_1_76_0.zip'
   )
-  getRepo(
-    'monero-core-custom',
-    'https://github.com/mymonero/monero-core-custom.git',
-    '936afd97467375511032d6a4eef6e76c982148dd'
-  )
-  getRepo(
-    'mymonero-core-cpp',
-    'https://github.com/ndorf/mymonero-core-cpp.git',
-    '15b6d0cb67f1e580fe2ab4324139af9c313c1c91'
+  getProsusCore(
+    'prosus-core',
+    'git@github.com:broader-io/prosus-core.git',
+    'cb326e6b7aa0eeb70a049fc8eae3cc86e3a450a5'
   )
   await copyFiles('src/', 'tmp/', [
-    'mymonero-wrapper/mymonero-methods.cpp',
-    'mymonero-wrapper/mymonero-methods.hpp'
+    'prosus-wrapper/prosus-methods.cpp',
+    'prosus-wrapper/prosus-methods.hpp'
   ])
 }
 
@@ -55,80 +50,96 @@ const defines: string[] = [
   'BOOST_SYSTEM_NO_DEPRECATED'
 ]
 
-// Compiler options derived loosely from mymonero-core-cpp/CMakeLists.txt:
+
 const includePaths: string[] = [
-  'boost_1_63_0/',
-  'monero-core-custom/',
-  'monero-core-custom/contrib/libsodium/include/',
-  'monero-core-custom/contrib/libsodium/include/sodium/',
-  'monero-core-custom/crypto/',
-  'monero-core-custom/cryptonote_basic/',
-  'monero-core-custom/cryptonote_core/',
-  'monero-core-custom/epee/include/',
-  'monero-core-custom/mnemonics/',
-  'monero-core-custom/vtlogger/',
-  'monero-core-custom/wallet/'
+  'boost_1_76_0/',
+  'prosus-core/core/contrib/prosus-money/cli/include',
+  'prosus-core/core/contrib/prosus-money/cli/src',
+  'prosus-core/core/src/custom',
+  'prosus-core/core/contrib/epee/include',
+
+  'prosus-core/core/bridge/include',
+
 ]
 
-// Source list derived loosely from mymonero-core-cpp/CMakeLists.txt:
 const sources: string[] = [
-  'boost_1_63_0/libs/thread/src/pthread/once.cpp',
-  'boost_1_63_0/libs/thread/src/pthread/thread.cpp',
-  'monero-core-custom/common/aligned.c',
-  'monero-core-custom/common/base58.cpp',
-  'monero-core-custom/common/threadpool.cpp',
-  'monero-core-custom/common/util.cpp',
-  'monero-core-custom/contrib/libsodium/src/crypto_verify/verify.c',
-  'monero-core-custom/crypto/aesb.c',
-  'monero-core-custom/crypto/blake256.c',
-  'monero-core-custom/crypto/chacha.c',
-  'monero-core-custom/crypto/crypto-ops-data.c',
-  'monero-core-custom/crypto/crypto-ops.c',
-  'monero-core-custom/crypto/crypto.cpp',
-  'monero-core-custom/crypto/groestl.c',
-  'monero-core-custom/crypto/hash-extra-blake.c',
-  'monero-core-custom/crypto/hash-extra-groestl.c',
-  'monero-core-custom/crypto/hash-extra-jh.c',
-  'monero-core-custom/crypto/hash-extra-skein.c',
-  'monero-core-custom/crypto/hash.c',
-  'monero-core-custom/crypto/jh.c',
-  'monero-core-custom/crypto/keccak.c',
-  'monero-core-custom/crypto/oaes_lib.c',
-  'monero-core-custom/crypto/random.c',
-  'monero-core-custom/crypto/skein.c',
-  'monero-core-custom/crypto/slow-hash-dummied.cpp',
-  'monero-core-custom/crypto/tree-hash.c',
-  'monero-core-custom/cryptonote_basic/account.cpp',
-  'monero-core-custom/cryptonote_basic/cryptonote_basic_impl.cpp',
-  'monero-core-custom/cryptonote_basic/cryptonote_format_utils.cpp',
-  'monero-core-custom/cryptonote_core/cryptonote_tx_utils.cpp',
-  'monero-core-custom/device/device_default.cpp',
-  'monero-core-custom/device/device.cpp',
-  'monero-core-custom/epee/src/hex.cpp',
-  'monero-core-custom/epee/src/memwipe.c',
-  'monero-core-custom/epee/src/mlocker.cpp',
-  'monero-core-custom/epee/src/string_tools.cpp',
-  'monero-core-custom/epee/src/wipeable_string.cpp',
-  'monero-core-custom/mnemonics/electrum-words.cpp',
-  'monero-core-custom/ringct/bulletproofs.cc',
-  'monero-core-custom/ringct/multiexp.cc',
-  'monero-core-custom/ringct/rctCryptoOps.c',
-  'monero-core-custom/ringct/rctOps.cpp',
-  'monero-core-custom/ringct/rctSigs.cpp',
-  'monero-core-custom/ringct/rctTypes.cpp',
-  'monero-core-custom/vtlogger/logger.cpp',
-  'mymonero-core-cpp/src/monero_address_utils.cpp',
-  'mymonero-core-cpp/src/monero_fee_utils.cpp',
-  'mymonero-core-cpp/src/monero_fork_rules.cpp',
-  'mymonero-core-cpp/src/monero_key_image_utils.cpp',
-  'mymonero-core-cpp/src/monero_paymentID_utils.cpp',
-  'mymonero-core-cpp/src/monero_send_routine.cpp',
-  'mymonero-core-cpp/src/monero_transfer_utils.cpp',
-  'mymonero-core-cpp/src/monero_wallet_utils.cpp',
-  'mymonero-core-cpp/src/serial_bridge_index.cpp',
-  'mymonero-core-cpp/src/serial_bridge_utils.cpp',
-  'mymonero-core-cpp/src/tools__ret_vals.cpp',
-  'mymonero-wrapper/mymonero-methods.cpp'
+  'boost_1_76_0/libs/thread/src/pthread/once.cpp',
+  'boost_1_76_0/libs/thread/src/pthread/thread.cpp',
+  'prosus-core/core/bridge/src/node_rpc_proxy.cpp',
+  'prosus-core/core/bridge/src/serial_bridge_index.cpp',
+  'prosus-core/core/bridge/src/tools__ret_vals.cpp',
+  'prosus-core/core/bridge/src/serial_bridge_utils.cpp',
+  'prosus-core/core/bridge/src/node_rpc_proxy.cpp',
+
+  'prosus-core/core/contrib/prosus-money/cli/src/Common/Base58.cpp',
+  'prosus-core/core/contrib/prosus-money/cli/src/Common/ConsoleTools.cpp',
+  'prosus-core/core/contrib/prosus-money/cli/src/Common/JsonValue.cpp',
+  'prosus-core/core/contrib/prosus-money/cli/src/Common/MemoryInputStream.cpp',
+  'prosus-core/core/contrib/prosus-money/cli/src/Common/StreamTools.cpp',
+  'prosus-core/core/contrib/prosus-money/cli/src/Common/StringOutputStream.cpp',
+  'prosus-core/core/contrib/prosus-money/cli/src/Common/StringTools.cpp',
+  'prosus-core/core/contrib/prosus-money/cli/src/Common/StringView.cpp',
+  'prosus-core/core/contrib/prosus-money/cli/src/Common/VectorOutputStream.cpp',
+  'prosus-core/core/contrib/prosus-money/cli/src/Common/StdInputStream.cpp',
+  'prosus-core/core/contrib/prosus-money/cli/src/Common/StdOutputStream.cpp',
+
+  'prosus-core/core/contrib/prosus-money/cli/src/crypto/blake256.c',
+  'prosus-core/core/contrib/prosus-money/cli/src/crypto/chacha8.c',
+  'prosus-core/core/contrib/prosus-money/cli/src/crypto/crypto.cpp',
+  'prosus-core/core/contrib/prosus-money/cli/src/crypto/crypto-ops.c',
+  'prosus-core/core/contrib/prosus-money/cli/src/crypto/crypto-ops-data.c',
+  'prosus-core/core/contrib/prosus-money/cli/src/crypto/groestl.c',
+  'prosus-core/core/contrib/prosus-money/cli/src/crypto/hash.c',
+  'prosus-core/core/contrib/prosus-money/cli/src/crypto/hash-extra-blake.c',
+  'prosus-core/core/contrib/prosus-money/cli/src/crypto/hash-extra-groestl.c',
+  'prosus-core/core/contrib/prosus-money/cli/src/crypto/hash-extra-jh.c',
+  'prosus-core/core/contrib/prosus-money/cli/src/crypto/hash-extra-skein.c',
+  'prosus-core/core/contrib/prosus-money/cli/src/crypto/jh.c',
+  'prosus-core/core/contrib/prosus-money/cli/src/crypto/keccak.c',
+  'prosus-core/core/contrib/prosus-money/cli/src/crypto/oaes_lib.c',
+  'prosus-core/core/contrib/prosus-money/cli/src/crypto/random.c',
+  'prosus-core/core/contrib/prosus-money/cli/src/crypto/skein.c',
+  'prosus-core/core/contrib/prosus-money/cli/src/crypto/slow-hash.c',
+  'prosus-core/core/contrib/prosus-money/cli/src/crypto/slow-hash.cpp',
+  'prosus-core/core/contrib/prosus-money/cli/src/crypto/tree-hash.c',
+
+  'prosus-core/core/contrib/prosus-money/cli/src/CryptoNoteCore/Account.cpp',
+  'prosus-core/core/contrib/prosus-money/cli/src/CryptoNoteCore/Blockchain.cpp',
+  'prosus-core/core/contrib/prosus-money/cli/src/CryptoNoteCore/CryptoNoteBasic.cpp',
+  'prosus-core/core/contrib/prosus-money/cli/src/CryptoNoteCore/CryptoNoteBasicImpl.cpp',
+  'prosus-core/core/contrib/prosus-money/cli/src/CryptoNoteCore/CryptoNoteFormatUtils.cpp',
+  'prosus-core/core/contrib/prosus-money/cli/src/CryptoNoteCore/CryptoNoteSerialization.cpp',
+  'prosus-core/core/contrib/prosus-money/cli/src/CryptoNoteCore/CryptoNoteTools.cpp',
+  'prosus-core/core/contrib/prosus-money/cli/src/CryptoNoteCore/Currency.cpp',
+  'prosus-core/core/contrib/prosus-money/cli/src/CryptoNoteCore/Difficulty.cpp',
+  'prosus-core/core/contrib/prosus-money/cli/src/CryptoNoteCore/TransactionExtra.cpp',
+  'prosus-core/core/contrib/prosus-money/cli/src/CryptoNoteCore/TransactionPrefixImpl.cpp',
+  'prosus-core/core/contrib/prosus-money/cli/src/CryptoNoteCore/TransactionUtils.cpp',
+
+  'prosus-core/core/contrib/prosus-money/cli/src/Logging/CommonLogger.cpp',
+  'prosus-core/core/contrib/prosus-money/cli/src/Logging/ConsoleLogger.cpp',
+  'prosus-core/core/contrib/prosus-money/cli/src/Logging/FileLogger.cpp',
+  'prosus-core/core/contrib/prosus-money/cli/src/Logging/ILogger.cpp',
+  'prosus-core/core/contrib/prosus-money/cli/src/Logging/LoggerGroup.cpp',
+  'prosus-core/core/contrib/prosus-money/cli/src/Logging/LoggerManager.cpp',
+  'prosus-core/core/contrib/prosus-money/cli/src/Logging/LoggerMessage.cpp',
+  'prosus-core/core/contrib/prosus-money/cli/src/Logging/LoggerRef.cpp',
+  'prosus-core/core/contrib/prosus-money/cli/src/Logging/StreamLogger.cpp',
+
+  'prosus-core/core/contrib/prosus-money/cli/src/mnemonics/electrum-words.cpp',
+
+  'prosus-core/core/contrib/prosus-money/cli/src/Serialization/BinaryInputStreamSerializer.cpp',
+  'prosus-core/core/contrib/prosus-money/cli/src/Serialization/BinaryOutputStreamSerializer.cpp',
+  'prosus-core/core/contrib/prosus-money/cli/src/Serialization/BinaryInputStreamSerializer.cpp',
+  //'prosus-core/core/contrib/prosus-money/cli/src/Serialization/ISerializer.h',
+  'prosus-core/core/contrib/prosus-money/cli/src/Serialization/SerializationOverloads.cpp',
+
+  'prosus-core/core/contrib/prosus-money/cli/src/Wallet/WalletErrors.cpp',
+
+  'prosus-core/core/contrib/epee/src/hex.cpp',
+  'prosus-core/core/contrib/epee/src/memwipe.c',
+  'prosus-core/core/contrib/epee/src/wipeable_string.cpp',
+  'prosus-wrapper/prosus-methods.cpp'
 ]
 
 // Phones and simulators we need to support:
@@ -145,23 +156,21 @@ const iosPlatforms: { [arch: string]: string } = {
 async function generateAndroidBuild() {
   // Clean existing stuff:
   const src = 'android/src/main/cpp/'
-  await disklet.delete(src + 'boost_1_63_0')
-  await disklet.delete(src + 'monero-core-custom')
-  await disklet.delete(src + 'mymonero-core-cpp')
-  await disklet.delete(src + 'mymonero-wrapper')
+  await disklet.delete(src + 'boost_1_76_0')
+  await disklet.delete(src + 'prosus-core')
+  await disklet.delete(src + 'prosus-wrapper')
 
   // Figure out which files we need:
   const headers = inferHeaders()
   const extraFiles: string[] = [
     // Preserve licenses:
-    'boost_1_63_0/LICENSE_1_0.txt',
-    'mymonero-core-cpp/LICENSE.txt',
+    'boost_1_76_0/LICENSE_1_0.txt',
 
     // Platform-specific files our header inference might not catch:
-    'boost_1_63_0/boost/atomic/detail/ops_extending_cas_based.hpp',
-    'boost_1_63_0/boost/config/platform/linux.hpp',
-    'boost_1_63_0/boost/detail/fenv.hpp',
-    'boost_1_63_0/boost/uuid/detail/uuid_generic.hpp'
+    //'boost_1_76_0/boost/atomic/detail/ops_extending_cas_based.hpp',
+    'boost_1_76_0/boost/config/platform/linux.hpp',
+    'boost_1_76_0/boost/detail/fenv.hpp',
+    //'boost_1_76_0/boost/uuid/detail/uuid_generic.hpp'
   ]
   for (const extra of extraFiles) {
     if (headers.indexOf(extra) >= 0) {
@@ -178,7 +187,7 @@ async function generateAndroidBuild() {
     'add_compile_options(-fvisibility=hidden -w)',
     ...defines.map(name => `add_definitions("-D${name}")`),
     ...includePaths.map(path => `include_directories("${path}")`),
-    `add_library(mymonero-jni SHARED ${sourceList})`
+    `add_library(prosus-jni SHARED ${sourceList})`
   ]
   await disklet.setText(src + 'CMakeLists.txt', cmakeLines.join('\n'))
 }
@@ -202,7 +211,7 @@ function inferHeaders(): string[] {
 
     const useCxx = /\.cpp$|\.cc$/.test(source)
     const report = quietExec([
-      'clang',
+      'clang++',
       '-M',
       ...(useCxx ? cxxflags : cflags),
       join(tmp, source)
@@ -233,8 +242,8 @@ async function generateIosLibrary(): Promise<void> {
     ...defines.map(name => `-D${name}`),
     ...includePaths.map(path => `-I${join(tmp, path)}`),
     '-miphoneos-version-min=9.0',
-    '-O2',
-    '-Werror=partial-availability'
+    '-O2', '-maes'
+    //'-std=c11 -maes -fno-strict-aliasing -march=native -D_GNU_SOURCE -Wall -Wextra -Wpointer-arith -Wno-error=unused-parameter -Wno-unused-parameter -Wno-error=undef -Wno-error=unused-variable -Wno-reorder-ctor -Wno-unused-lambda-capture -Wno-unused-private-field -Wno-comment -Wno-reorder -Wno-missing-field-initializers -Wno-unused-variable -Wno-return-std-move -Wno-unused-function -Wno-uninitialized -Wno-range-loop-construct -Wno-delete-non-abstract-non-virtual-dtor -Wno-sign-compare -Wno-deprecated-copy -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk'
   ]
   const cxxflags = [...cflags, '-std=c++11']
 
@@ -247,8 +256,8 @@ async function generateIosLibrary(): Promise<void> {
     // Find platform tools:
     const xcrun = ['xcrun', '--sdk', iosPlatforms[arch]]
     const ar = quietExec([...xcrun, '--find', 'ar'])
-    const cc = quietExec([...xcrun, '--find', 'clang'])
-    const cxx = quietExec([...xcrun, '--find', 'clang++'])
+    const cc = quietExec([...xcrun, '--find', 'cc'])
+    const cxx = quietExec([...xcrun, '--find', 'c++'])
     const sdkFlags = [
       `-arch ${arch}`,
       `-isysroot ${quietExec([...xcrun, '--show-sdk-path'])}`
@@ -278,7 +287,7 @@ async function generateIosLibrary(): Promise<void> {
     }
 
     // Generate a static library:
-    const library = join(working, `libmymonero-core.a`)
+    const library = join(working, `libprosus-core.a`)
     if (existsSync(library)) unlinkSync(library)
     libraries.push(library)
     quietExec([ar, 'rcs', library, ...objects])
@@ -289,7 +298,7 @@ async function generateIosLibrary(): Promise<void> {
     'lipo',
     '-create',
     '-output',
-    join(__dirname, '../ios/Libraries/libmymonero-core.a'),
+    join(__dirname, '../ios/Libraries/libprosus-core.a'),
     ...libraries
   ])
 }
@@ -297,13 +306,16 @@ async function generateIosLibrary(): Promise<void> {
 /**
  * Clones a git repo and checks our a hash.
  */
-function getRepo(name: string, uri: string, hash: string): void {
+function getProsusCore(name: string, uri: string, hash: string): void {
   const path = join(tmp, name)
 
   // Clone (if needed):
   if (!existsSync(path)) {
     console.log(`Cloning ${name}...`)
     loudExec(['git', 'clone', uri, name])
+    process.chdir( 'prosus-core' )
+    loudExec(['git', 'submodule', 'update', '--init', 'core/contrib/prosus-money'])
+    process.chdir( '..' )
   }
 
   // Checkout:

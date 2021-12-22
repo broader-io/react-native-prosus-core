@@ -5,9 +5,8 @@
 /android/google-java-format-1.7-all-deps.jar
 /android/src/main/cpp/CMakeLists.txt
 /android/src/main/cpp/boost_1_63_0/
-/android/src/main/cpp/monero-core-custom/
-/android/src/main/cpp/mymonero-core-cpp/
-/android/src/main/cpp/mymonero-wrapper/
+/android/src/main/cpp/prosus-core/
+/android/src/main/cpp/prosus-wrapper/
 
 # iOS stuff:
 .DS_Store

@@ -1,4 +1,4 @@
-package app.edge.reactnative.mymonerocore;
+package app.edge.reactnative.prosuscore;
 
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.NativeModule;
@@ -8,10 +8,10 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class MyMoneroPackage implements ReactPackage {
+public class ProsusPackage implements ReactPackage {
   @Override
   public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
-    return Arrays.<NativeModule>asList(new MyMoneroModule(reactContext));
+    return Arrays.<NativeModule>asList(new ProsusModule(reactContext));
   }
 
   @Override

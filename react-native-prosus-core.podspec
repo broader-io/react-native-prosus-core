@@ -13,14 +13,14 @@ Pod::Spec.new do |s|
   s.platform     = :ios, "9.0"
   s.requires_arc = true
   s.source = {
-    :git => "https://github.com/EdgeApp/react-native-mymonero-core.git",
+    :git => "https://github.com/EdgeApp/react-native-prosus-core.git",
     :tag => "v#{s.version}"
   }
   s.source_files =
-    "ios/MyMoneroCore.h",
-    "ios/MyMoneroCore.mm",
-    "src/mymonero-wrapper/mymonero-methods.hpp"
-  s.vendored_libraries = "ios/Libraries/libmymonero-core.a"
+    "ios/ProsusCore.h",
+    "ios/ProsusCore.mm",
+    "src/prosus-wrapper/prosus-methods.hpp"
+  s.vendored_libraries = "ios/Libraries/prosus-core.a"
 
   s.dependency "React"
 end

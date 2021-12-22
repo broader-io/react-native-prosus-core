@@ -1,13 +1,13 @@
-# react-native-mymonero-core
+# react-native-prosus-core
 
-This library packages the [mymonero-core-cpp](https://github.com/mymonero/mymonero-core-cpp) library for use on React Native.
+This library packages the [prosus-core-cpp](https://github.com/prosus/prosus-core-cpp) library for use on React Native.
 
-It exposes a single method, `callMyMonero`, which accepts and returns JSON strings for now:
+It exposes a single method, `callProsus`, which accepts and returns JSON strings for now:
 
 ```js
-import { callMyMonero } from 'react-native-mymonero-core'
+import { callProsus } from 'react-native-prosus-core'
 
-const jsonResult = await callMyMonero('is_subaddress', JSON.stringify(args))
+const jsonResult = await callProsus('is_subaddress', JSON.stringify(args))
 const result = JSON.parse(jsonResult)
 ```
 
@@ -30,4 +30,4 @@ This script does the following tasks:
   - Assemble `CMakeLists.txt`.
 - Compile an iOS universal static library.
 
-The `update-sources` script is also the place to make edits when upgrading any of the third-party dependencies. The react-native-mymonero-core repo doesn't include these third-party C++ sources, since they are enormous.
+The `update-sources` script is also the place to make edits when upgrading any of the third-party dependencies. The react-native-prosus-core repo doesn't include these third-party C++ sources, since they are enormous.

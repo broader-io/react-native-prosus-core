@@ -19,7 +19,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		3DB4997E255F34E200ADAF67 /* libreact-native-mymonero-core.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libreact-native-mymonero-core.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3DB4997E255F34E200ADAF67 /* libreact-native-prosus-core.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libreact-native-prosus-core.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,7 +43,7 @@
 		3DB4997F255F34E200ADAF67 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3DB4997E255F34E200ADAF67 /* libreact-native-mymonero-core.a */,
+				3DB4997E255F34E200ADAF67 /* libreact-native-prosus-core.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -51,9 +51,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		3DB4997D255F34E200ADAF67 /* react-native-mymonero-core */ = {
+		3DB4997D255F34E200ADAF67 /* react-native-prosus-core */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3DB49987255F34E200ADAF67 /* Build configuration list for PBXNativeTarget "react-native-mymonero-core" */;
+			buildConfigurationList = 3DB49987255F34E200ADAF67 /* Build configuration list for PBXNativeTarget "react-native-prosus-core" */;
 			buildPhases = (
 				3DB4997A255F34E200ADAF67 /* Sources */,
 				3DB4997B255F34E200ADAF67 /* Frameworks */,
@@ -63,9 +63,9 @@
 			);
 			dependencies = (
 			);
-			name = "react-native-mymonero-core";
-			productName = "react-native-mymonero-core";
-			productReference = 3DB4997E255F34E200ADAF67 /* libreact-native-mymonero-core.a */;
+			name = "react-native-prosus-core";
+			productName = "react-native-prosus-core";
+			productReference = 3DB4997E255F34E200ADAF67 /* libreact-native-prosus-core.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -81,7 +81,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 3DB49979255F34E200ADAF67 /* Build configuration list for PBXProject "react-native-mymonero-core" */;
+			buildConfigurationList = 3DB49979255F34E200ADAF67 /* Build configuration list for PBXProject "react-native-prosus-core" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -94,7 +94,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				3DB4997D255F34E200ADAF67 /* react-native-mymonero-core */,
+				3DB4997D255F34E200ADAF67 /* react-native-prosus-core */,
 			);
 		};
 /* End PBXProject section */
@@ -248,7 +248,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		3DB49979255F34E200ADAF67 /* Build configuration list for PBXProject "react-native-mymonero-core" */ = {
+		3DB49979255F34E200ADAF67 /* Build configuration list for PBXProject "react-native-prosus-core" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3DB49985255F34E200ADAF67 /* Debug */,
@@ -257,7 +257,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3DB49987255F34E200ADAF67 /* Build configuration list for PBXNativeTarget "react-native-mymonero-core" */ = {
+		3DB49987255F34E200ADAF67 /* Build configuration list for PBXNativeTarget "react-native-prosus-core" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3DB49988255F34E200ADAF67 /* Debug */,

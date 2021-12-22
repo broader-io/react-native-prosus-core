@@ -1,7 +1,7 @@
-#include "mymonero-methods.hpp"
-#include "../mymonero-core-cpp/src/serial_bridge_index.hpp"
+#include "prosus-methods.hpp"
+#include "../../tmp/prosus-core/core/bridge/include/serial_bridge_index.hpp"
 
-const MyMoneroMethod myMoneroMethods[] = {
+const ProsusMethod ProsusMethods[] = {
     { "address_and_keys_from_seed", serial_bridge::address_and_keys_from_seed },
     { "are_equal_mnemonics", serial_bridge::are_equal_mnemonics },
     { "decode_address", serial_bridge::decode_address },
@@ -23,4 +23,4 @@ const MyMoneroMethod myMoneroMethods[] = {
     { "validate_components_for_login", serial_bridge::validate_components_for_login }
 };
 
-const unsigned myMoneroMethodCount = std::end(myMoneroMethods) - std::begin(myMoneroMethods);
+const unsigned ProsusMethodCount = std::end(ProsusMethods) - std::begin(ProsusMethods);

@@ -1,4 +1,4 @@
-#include "mymonero-wrapper/mymonero-methods.hpp"
+#include "prosus-wrapper/prosus-methods.hpp"
 
 #include <jni.h>
 #include <cstring>
@@ -13,7 +13,7 @@ static const std::string unpackJstring(JNIEnv *env, jstring s) {
 extern "C" {
 
 JNIEXPORT jstring JNICALL
-Java_app_edge_reactnative_mymonerocore_MyMoneroModule_callMyMoneroJNI(
+Java_app_edge_reactnative_prosus_ProsusModule_callProsusJNI(
     JNIEnv *env,
     jobject self,
     jstring method,
@@ -23,17 +23,17 @@ Java_app_edge_reactnative_mymonerocore_MyMoneroModule_callMyMoneroJNI(
   const std::string argumentsString = unpackJstring(env, arguments);
 
   // Find the named method:
-  for (int i = 0; i < myMoneroMethodCount; ++i) {
-    if (myMoneroMethods[i].name != methodString) continue;
+  for (int i = 0; i < ProsusMethodCount; ++i) {
+    if (ProsusMethods[i].name != methodString) continue;
 
     // Call the method, with error handling:
     try {
-      const std::string out = myMoneroMethods[i].method(argumentsString);
+      const std::string out = ProsusMethods[i].method(argumentsString);
       return env->NewStringUTF(out.c_str());
     } catch (...) {
       env->ThrowNew(
         env->FindClass("java/lang/Exception"),
-        "mymonero-core-cpp threw an exception"
+        "prosus-core-cpp threw an exception"
       );
       return nullptr;
     }
@@ -41,7 +41,7 @@ Java_app_edge_reactnative_mymonerocore_MyMoneroModule_callMyMoneroJNI(
 
   env->ThrowNew(
     env->FindClass("java/lang/NoSuchMethodException"),
-    ("No mymonero-core-cpp method " + methodString).c_str()
+    ("No prosus-core-cpp method " + methodString).c_str()
   );
   return nullptr;
 }
